@@ -1,15 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
+import { Board } from './entities/board.entity';
 
 @Injectable()
 export class BoardService {
+  private board: Array<Board> = [];
+  private id = 0;
+
   create(createBoardDto: CreateBoardDto) {
-    return 'This action adds a new board';
+    this.board.push({
+      id: ++this.id,
+      ...createBoardDto,
+      createdAt: new Date(),
+    });
   }
 
   findAll() {
-    return `This action returns all board`;
+    return this.board;
   }
 
   findOne(id: number) {
