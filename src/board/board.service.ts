@@ -31,7 +31,13 @@ export class BoardService {
   }
 
   update(id: number, updateBoardDto: UpdateBoardDto) {
-    return `This action updates a #${id} board`;
+    for (let i = 0; i < this.board.length; i++) {
+      if (this.board[i].id === id) {
+        this.board[i][Object.keys(updateBoardDto)[0]] =
+          Object.values(updateBoardDto)[0];
+      }
+    }
+    return this.board[id - 1].title;
   }
 
   remove(id: number) {
